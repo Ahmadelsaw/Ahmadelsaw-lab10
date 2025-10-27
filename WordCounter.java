@@ -4,9 +4,7 @@ import java.util.regex.*;
 
 public class WordCounter {
 
-    public static int processText(StringBuffer text, String stopword)
-            throws InvalidStopwordException, TooSmallText {
-
+    public static int processText(StringBuffer text, String stopword) throws InvalidStopwordException, TooSmallText {
         if (text == null) {
             text = new StringBuffer("");
         }
@@ -23,9 +21,7 @@ public class WordCounter {
             totalCount++;
             if (!stopFound) {
                 countThroughStop++;
-                if (stopword != null && word.equalsIgnoreCase(stopword)) {
-                    stopFound = true;
-                }
+                if (stopword != null && word.equalsIgnoreCase(stopword)) {stopFound = true;}
             }
         }
 
@@ -36,20 +32,16 @@ public class WordCounter {
         if (stopword != null && !stopFound) {
             throw new InvalidStopwordException("Couldn't find stopword: " + stopword);
         }
-
-        return (stopword != null) ? countThroughStop : totalCount;
-    }
+        if (stopword != null) {
+            return countThroughStop;
+        } else {
+            return totalCount;
+        }
     
-    // --- METHOD OVERLOAD 1: Used by the Lab10_Tester standalone tests (Tests 8, 9, 10) ---
-    // This calls the full version, but creates a temporary Scanner for its local use.
     public static StringBuffer processFile(String path) throws EmptyFileException {
-        // NOTE: Creating a Scanner here is necessary for the tester's direct calls, 
-        // even though it's technically bad practice for the main run.
         return processFile(path, new Scanner(System.in));
     }
 
-    // --- METHOD OVERLOAD 2: Used by WordCounter.main() to fix I/O conflicts (Tests 11-14) ---
-    // This is the functional version that requires the main Scanner object.
     public static StringBuffer processFile(String path, Scanner input) throws EmptyFileException {
         File file = new File(path);
         Scanner fileScanner = null;
@@ -89,14 +81,12 @@ public class WordCounter {
         // This is the ONE AND ONLY Scanner attached to System.in for the main loop
         Scanner input = new Scanner(System.in);
 
-        // ---- Get option ----
+        //Get option
         Integer optFromArgs = null;
         if (args.length >= 1) {
             try {
                 int tempOpt = Integer.parseInt(args[0]);
-                if (tempOpt == 1 || tempOpt == 2) {
-                    optFromArgs = tempOpt;
-                }
+                if (tempOpt == 1 || tempOpt == 2) {optFromArgs = tempOpt;}
             } catch (NumberFormatException ignored) {}
         }
 
@@ -113,7 +103,7 @@ public class WordCounter {
             }
         }
 
-        // ---- Stopword ----
+        //Stopword
         String stopword = (args.length > 1) ? args[1] : null;
 
         StringBuffer text = new StringBuffer("");
@@ -129,10 +119,10 @@ public class WordCounter {
                     path = input.nextLine();
                 }
                 
-                // CALL THE OVERLOADED VERSION with the Scanner
+                // CALL THE OVERLOADED VERSION WIth the Scanner
                 text = processFile(path, input); 
             } else {
-                // text mode:
+                // text mode
                 if (args.length >= 3) {
                     text = new StringBuffer(args[2]);
                 } else {
@@ -151,7 +141,7 @@ public class WordCounter {
             } catch (TooSmallText t) {
                 System.out.println(t);
             } catch (InvalidStopwordException ignored) {
-                // Ignore InvalidStopword here as TooSmallText is expected
+                // Ignore invalidstopword here as toodmalltext is expected
             }
         } catch (InvalidStopwordException e) {
             // Retry logic
