@@ -1,0 +1,1 @@
+This file has enough words to not trigger and exception and the stopword we're going to use is yellow so we shouldn't have scanned into this point -- it just isn't necessary...unless the stopword we wanted was green in which case we stopped above. Or, perhaps no stopword was provided, so then we will read in the whole file. 

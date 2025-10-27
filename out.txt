@@ -1,0 +1,10 @@
+Choose: 1 = process file, 2 = process text
+Found 5 words.
+Choose: 1 = process file, 2 = process text
+Found 9 words.
+Choose: 1 = process file, 2 = process text
+EmptyFileException: file1.txt was empty
+TooSmallText: Only found 0 words.
+Choose: 1 = process file, 2 = process text
+TooSmallText: Only found 2 words.
+File not found. Enter another filename:

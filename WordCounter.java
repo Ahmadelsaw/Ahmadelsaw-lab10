@@ -37,6 +37,7 @@ public class WordCounter {
         } else {
             return totalCount;
         }
+    }
     
     public static StringBuffer processFile(String path) throws EmptyFileException {
         return processFile(path, new Scanner(System.in));
